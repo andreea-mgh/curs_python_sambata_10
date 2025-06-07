@@ -55,14 +55,19 @@ t.color(1, 0.5, 0)     # orange
 # t.end_fill()
 
 
-optiune = input()
+while True:
 
-if optiune == "stea":
-    stea(12,5)
-elif optiune == "poli":
-    poligon(7)
-else:
-    print("nu stiu forma aia")
+    optiune = input()
+
+    if optiune in ["s", "stea", "steluta"]:
+        stea(12,5)
+    elif optiune in ["p", "poli", "poligon"]:
+        optiune = input()
+        poligon(int(optiune))
+    elif optiune == "stop":
+        break
+    else:
+        print("nu stiu forma aia")
 
 
 
