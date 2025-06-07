@@ -55,6 +55,15 @@ t.color(1, 0.5, 0)     # orange
 # t.end_fill()
 
 
+optiune = input()
+
+if optiune == "stea":
+    stea(12,5)
+elif optiune == "poli":
+    poligon(7)
+else:
+    print("nu stiu forma aia")
+
 
 
 
