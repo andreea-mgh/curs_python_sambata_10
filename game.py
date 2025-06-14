@@ -1,3 +1,14 @@
+import os
+
+def clean():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+    # if os.name == 'nt':
+    #     os.system('cls')
+    # else:
+    #     os.system('clear')
+
+
 game_map = ['################',
             '#    #$#  !  # #',
             '## $ #       ! #',
@@ -38,51 +49,55 @@ while True:
     show_map()
 
     instructiune = input()
+    clean()
     instructiune = instructiune.split()
 
-    if instructiune[0] in ["move", "m"]:
+    if len(instructiune) > 0:
 
+        if instructiune[0] in ["move", "m"]:
 
-        new_x = player_x
-        new_y = player_y
+            if len(instructiune) > 1:
 
-        if instructiune[1] in ["up", "u", "north", "n"]:
-            print("moving up")
-            if player_y > 0 and game_map[player_y-1][player_x] != '#':
-                new_y = player_y - 1
+                new_x = player_x
+                new_y = player_y
 
-        elif instructiune[1] in ["down", "d", "south", "s"]:
-            print("moving down")
-            if player_y < game_h and game_map[player_y+1][player_x] != '#':
-                new_y = player_y + 1
+                if instructiune[1] in ["up", "u", "north", "n"]:
+                    print("moving up")
+                    if player_y > 0 and game_map[player_y-1][player_x] != '#':
+                        new_y = player_y - 1
 
-        elif instructiune[1] in ["left", "l", "west", "w"]:
-            print("moving left")
-            if player_x > 0 and game_map[player_y][player_x-1] != '#':
-                new_x = player_x - 1
+                elif instructiune[1] in ["down", "d", "south", "s"]:
+                    print("moving down")
+                    if player_y < game_h and game_map[player_y+1][player_x] != '#':
+                        new_y = player_y + 1
 
-        elif instructiune[1] in ["right", "r", "east", "e"]:
-            print("moving right")
-            if player_x < game_w and game_map[player_y][player_x+1] != '#':
-                new_x = player_x + 1
+                elif instructiune[1] in ["left", "l", "west", "w"]:
+                    print("moving left")
+                    if player_x > 0 and game_map[player_y][player_x-1] != '#':
+                        new_x = player_x - 1
 
-        if new_x != player_x or new_y != player_y:
-            if game_map[new_y][new_x] == '$':
-                GOLD = GOLD + 1
-                print("You found gold! Gold amount:", GOLD)
+                elif instructiune[1] in ["right", "r", "east", "e"]:
+                    print("moving right")
+                    if player_x < game_w and game_map[player_y][player_x+1] != '#':
+                        new_x = player_x + 1
 
-            elif game_map[new_y][new_x] == '!':
-                print("entering combat...")
-            
-            game_map[player_y][player_x] = ' '
-            game_map[new_y][new_x] = 'p'
-            player_x = new_x
-            player_y = new_y
+                if new_x != player_x or new_y != player_y:
+                    if game_map[new_y][new_x] == '$':
+                        GOLD = GOLD + 1
+                        print("You found gold! Gold amount:", GOLD)
 
-    elif instructiune[0] in ["check", "stats"]:
-        print('HP:  ', HP)
-        print('EXP: ', EXP)
-        print('GOLD:', GOLD)
+                    elif game_map[new_y][new_x] == '!':
+                        print("entering combat...")
+                    
+                    game_map[player_y][player_x] = ' '
+                    game_map[new_y][new_x] = 'p'
+                    player_x = new_x
+                    player_y = new_y
+
+        elif instructiune[0] in ["check", "stats"]:
+            print('HP:  ', HP)
+            print('EXP: ', EXP)
+            print('GOLD:', GOLD)
 
 
 
