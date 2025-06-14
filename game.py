@@ -9,15 +9,15 @@ def clean():
     #     os.system('clear')
 
 
-game_map = ['################',
-            '#    #$#  !  # #',
-            '## $ #       ! #',
-            '#$   ###  $  ###',
-            '#    ! #     ! #',
-            '#   ####     # #',
-            '#   #    p   # #',
-            '#   !        #$#',
-            '################', ]
+game_map = ['████████████████',
+            '█    █$█  !  █ █',
+            '██ $ █       ! █',
+            '█$   ███  $  ███',
+            '█    ! █     ! █',
+            '█   ████     █ █',
+            '█   █    p   █ █',
+            '█   !        █$█',
+            '████████████████', ]
 
 game_map = [list(row) for row in game_map]
 
@@ -63,22 +63,22 @@ while True:
 
                 if instructiune[1] in ["up", "u", "north", "n"]:
                     print("moving up")
-                    if player_y > 0 and game_map[player_y-1][player_x] != '#':
+                    if player_y > 0 and game_map[player_y-1][player_x] != '█':
                         new_y = player_y - 1
 
                 elif instructiune[1] in ["down", "d", "south", "s"]:
                     print("moving down")
-                    if player_y < game_h and game_map[player_y+1][player_x] != '#':
+                    if player_y < game_h and game_map[player_y+1][player_x] != '█':
                         new_y = player_y + 1
 
                 elif instructiune[1] in ["left", "l", "west", "w"]:
                     print("moving left")
-                    if player_x > 0 and game_map[player_y][player_x-1] != '#':
+                    if player_x > 0 and game_map[player_y][player_x-1] != '█':
                         new_x = player_x - 1
 
                 elif instructiune[1] in ["right", "r", "east", "e"]:
                     print("moving right")
-                    if player_x < game_w and game_map[player_y][player_x+1] != '#':
+                    if player_x < game_w and game_map[player_y][player_x+1] != '█':
                         new_x = player_x + 1
 
                 if new_x != player_x or new_y != player_y:
