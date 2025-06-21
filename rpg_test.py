@@ -1,5 +1,5 @@
 import os
-from random import randint as rand
+import random
 
 def clean():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -56,6 +56,7 @@ while True:
     if len(instructiune) > 0:
 
         if instructiune[0] in ["move", "m"]:
+
             in_combat = False
 
             if len(instructiune) > 1:
@@ -96,54 +97,45 @@ while True:
                     game_map[new_y][new_x] = 'p'
                     player_x = new_x
                     player_y = new_y
-                    
-                    enemy_health = 4
-                    while in_combat:
-                        print("Enemy HP:", enemy_health)
-                        print("Your HP: ", HP)
 
-                        action = input("Choose action (attack, run): ")
-                        action = action.split()
 
-                        if len(action) > 0:
+                    enemy_HP = 5
+                    while(in_combat):
+                        print("Enemy HP:", enemy_HP)
+                        print("Your HP:", HP)
+                        action = input("Choose action (attack, run): ").strip().lower()
 
-                            if action[0] in ["a", "attack"]:
-                                enemy_health -= rand(1, 2)
-                                print("Enemy HP is now", enemy_health)
+                        if action == "attack":
+                            enemy_HP -= random.randint(1, 3)
+                            print("You attacked the enemy! Enemy HP is now", enemy_HP)
 
-                                if enemy_health <= 0:
-                                    print("Victory!")
-                                    loot_gold = rand(2, 5)
-                                    loot_exp = 5
-                                    print("You earned",loot_exp,"EXP")
-                                    print("You found",loot_gold,"GOLD")
-                                    in_combat = False
+                            if enemy_HP <= 0:
+                                print("You defeated the enemy!")
+                                EXP += 5
+                                GOLD += random.randint(1, 3)
+                                in_combat = False
+                            else:
+                                HP -= 1
+                                print("The enemy attacked you! Your HP is now", HP)
 
-                                else:
-                                    HP -= 1
-                                    print("The enemy attacked, your HP is", HP)
+                                if HP <= 0:
+                                    print("You have been defeated!")
+                                    exit(0)
 
-                                    if HP <= 0:
-                                        print("You died.")
-                                        exit(0)
+                        elif action == "run":
+                            chance = random.randint(1, 10)
+                            if chance > 3:
+                                clean()
+                                print("You successfully ran away!")
+                                in_combat = False
+                            else:
+                                print("You failed to run away!")
+                                HP -= 1
+                                print("The enemy attacked you! Your HP is now", HP)
 
-                            elif action[0] in ["r", "run"]:
-                                chance = rand(1,10)
-
-                                # 40% sanse sa scapam
-                                if chance <= 4:
-                                    clean()
-                                    print("You escaped!")
-                                    in_combat = False
-
-                                else:
-                                    HP -= 1
-                                    print("The enemy attacked, your HP is", HP)
-
-                                    if HP <= 0:
-                                        print("You died.")
-                                        exit(0)
-
+                                if HP <= 0:
+                                    print("You have been defeated!")
+                                    exit(0)
 
 
         elif instructiune[0] in ["check", "stats"]:
@@ -151,9 +143,7 @@ while True:
             print('EXP: ', EXP)
             print('GOLD:', GOLD)
 
-        elif instructiune[0] in ["q", "quit", "exit"]:
-            break
-            # exit(0)
+
 
 
 
