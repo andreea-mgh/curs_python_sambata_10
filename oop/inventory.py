@@ -93,6 +93,18 @@ class Inventory:
         self.backpack.append(item)
         self.eqp[slot] = None
 
+    def get_stats(self):
+        combat_stats = {
+            "atk": 0,
+            "def": 0
+        }
+        for item in self.eqp.values():
+            if item is not None:
+                for prop,val in item.properties.items():
+                    if prop in combat_stats.keys():
+                        combat_stats[prop] += val
+        return combat_stats
+
 
 inv = Inventory()
 inv.add_item(Item("hat"))
@@ -103,7 +115,4 @@ inv.show_backpack()
 inv.equip(1)
 inv.show_backpack()
 inv.show_eqp()
-
-inv.unequip("head")
-inv.show_backpack()
-inv.show_eqp()
+print(inv.get_stats())
